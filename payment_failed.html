@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>❌ Ошибка оплаты</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        Telegram.WebApp.ready();
+        Telegram.WebApp.showAlert("Оплата не прошла. Попробуйте ещё раз.");
+        Telegram.WebApp.close();
+    </script>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 20px; }
+        h1 { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>❌ Оплата не удалась</h1>
+    <p>Попробуйте снова или обратитесь в поддержку.</p>
+</body>
+</html>
