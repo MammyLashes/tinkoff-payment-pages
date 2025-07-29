@@ -1,20 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>✅ Платеж успешен</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        // Закрываем WebApp сразу после загрузки
-        Telegram.WebApp.ready();
-        Telegram.WebApp.close();
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✅ Оплата успешна</title>
     <style>
-        body { font-family: Arial; text-align: center; padding: 20px; }
-        h1 { color: #28a745; }
+        :root {
+            --primary-color: #28a745;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            font-size: 72px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        /* Мобильные устройства */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                width: 85%;
+            }
+
+            .icon {
+                font-size: 60px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Десктопы */
+        @media (min-width: 1024px) {
+            .container {
+                padding: 40px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>✅ Платеж успешно завершен!</h1>
-    <p>Окно закроется автоматически...</p>
+    <div class="container">
+        <div class="icon">✓</div>
+        <h1>Оплата прошла успешно!</h1>
+        <p>Ожидайте подтверждения записи в боте.</p>
+        <p>Вы можете закрыть эту страницу.</p>
+        
+        <button class="btn" onclick="window.close()">Закрыть</button>
+    </div>
+
+    <script>
+        // Проверяем, можно ли закрыть окно (работает не во всех браузерах)
+        function isClosable() {
+            try {
+                return typeof window.close === 'function' && !window.closed;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Скрываем кнопку "Закрыть", если окно нельзя закрыть
+        if (!isClosable()) {
+            document.querySelector('.btn').style.display = 'none';
+        }
+
+        // Автоматический редирект в бота через 5 секунд (опционально)
+        setTimeout(() => {
+            const botUsername = "YourBotUsername"; // Замените на @username бота
+            const deepLink = `https://t.me/${botUsername}`;
+            
+            if (isClosable()) {
+                window.close();
+            } else {
+                window.location.href = deepLink;
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
