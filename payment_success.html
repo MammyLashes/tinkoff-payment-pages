@@ -26,46 +26,30 @@
 
         .container {
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             padding: 30px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .icon {
-            font-size: 72px;
+            font-size: 64px;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
 
         h1 {
             color: var(--primary-color);
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 15px;
         }
 
         p {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
             font-size: 16px;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #218838;
+            line-height: 1.5;
+            margin-bottom: 5px;
+            color: #555;
         }
 
         /* Мобильные устройства */
@@ -76,26 +60,26 @@
             }
 
             .icon {
-                font-size: 60px;
+                font-size: 56px;
             }
 
             h1 {
-                font-size: 24px;
-            }
-
-            p {
-                font-size: 16px;
-            }
-
-            .btn {
-                padding: 10px 20px;
+                font-size: 22px;
             }
         }
 
         /* Десктопы */
-        @media (min-width: 1024px) {
+        @media (min-width: 768px) {
             .container {
                 padding: 40px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 18px;
             }
         }
     </style>
@@ -105,37 +89,7 @@
         <div class="icon">✓</div>
         <h1>Оплата прошла успешно!</h1>
         <p>Ожидайте подтверждения записи в боте.</p>
-        <p>Вы можете закрыть эту страницу.</p>
-        
-        <button class="btn" onclick="window.close()">Закрыть</button>
+        <p>Теперь вы можете просто свернуть браузер.</p>
     </div>
-
-    <script>
-        // Проверяем, можно ли закрыть окно (работает не во всех браузерах)
-        function isClosable() {
-            try {
-                return typeof window.close === 'function' && !window.closed;
-            } catch (e) {
-                return false;
-            }
-        }
-
-        // Скрываем кнопку "Закрыть", если окно нельзя закрыть
-        if (!isClosable()) {
-            document.querySelector('.btn').style.display = 'none';
-        }
-
-        // Автоматический редирект в бота через 5 секунд (опционально)
-        setTimeout(() => {
-            const botUsername = "YourBotUsername"; // Замените на @username бота
-            const deepLink = `https://t.me/${botUsername}`;
-            
-            if (isClosable()) {
-                window.close();
-            } else {
-                window.location.href = deepLink;
-            }
-        }, 5000);
-    </script>
 </body>
 </html>
